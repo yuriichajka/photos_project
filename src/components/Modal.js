@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {MdClose} from 'react-icons/md'
 
@@ -83,6 +83,17 @@ const Comments = styled.div`
 
 export default function Modal({showModal, setShowModal}) {
 
+    let [name, setName] = useState('')
+    let [comm, setComm] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        if (!name || !comm) return
+
+        console.log(name,comm);
+    }
+
     return (
         <>
             {showModal ? (
@@ -90,9 +101,11 @@ export default function Modal({showModal, setShowModal}) {
                     <ModalWrapper showModal={showModal}>
                         <ModalContent>
                             <img src='https://picsum.photos/id/240/300/200' alt="pic" width='400px'/>
-                            <input type="text" placeholder='Ваше имя'/>
-                            <input type="text" placeholder='Ваш комментарий'/>
-                            <button>Оставить отзыв</button>
+                            <form onSubmit={handleSubmit}>
+                                <input type="text" value={name} onChange={({target: {value}}) => setName(value)} placeholder='Ваше имя'/>
+                                <input type="text" value={comm} onChange={({target: {value}}) => setComm(value)} placeholder='Ваш комментарий'/>
+                                <button disabled={!name || !comm}>Оставить отзыв</button>
+                            </form>
                         </ModalContent>
                         <CloseModalButton aria-label='Close modal' onClick={() => setShowModal(prev => !prev)}/>
                         <Comments>
