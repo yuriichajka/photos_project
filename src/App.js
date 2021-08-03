@@ -1,17 +1,13 @@
 import './App.css';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {Col, Container, Row} from "react-bootstrap";
+import {GlobalStyles} from "./GlobalStyles";
 import Modal from "./components/Modal";
-import {GlobalStyles} from "./globalStyles";
 import styled from "styled-components";
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 20px;
-  text-align: center;
+const Img = styled.img`
+    margin: 10px;
 `
-
 
 function App() {
 
@@ -24,29 +20,26 @@ function App() {
         })
   }, [])
 
-
     let [showModal, setShowModal] = useState(false);
     const openModal = (e) => {
-        setShowModal(prev => !prev )
-        console.log(e)
+        setShowModal(prev => !prev)
     }
-
-
-
 
 
   return (
     <>
+        <Modal showModal={showModal} setShowModal={setShowModal}/>
         <Container>
-      {
-        images.map(value => <div>
-          <img onClick={() => openModal(value.url)} src={value.url} alt='da'/>
-        </div>)
-      }
-
-            <Modal showModal={showModal} setShowModal={setShowModal} />
-            <GlobalStyles/>
+            <Row className="justify-content-md-center">
+                <Col lg={9} className='xxx'>
+                    {
+                        images.map(value => <Img src={value.url} alt="some" onClick={openModal}/>)
+                    }
+                </Col>
+            </Row>
         </Container>
+
+        <GlobalStyles/>
     </>
   );
 }
