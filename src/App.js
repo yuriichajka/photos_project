@@ -29,6 +29,7 @@ function App() {
   return (
     <>
         <Modal showModal={showModal} setShowModal={setShowModal}/>
+
         <Container>
             <Row className="justify-content-md-center">
                 <Col lg={9} className='xxx'>
