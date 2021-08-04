@@ -23,7 +23,6 @@ export const CloseModalButton = styled(MdClose)`
 `
 export const ModalWrapper = styled.div`
     width: 800px;
-    //height: 500px;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
     color: #000;
     background: #fff;
@@ -56,4 +55,4 @@ export const Comment = styled.div`
 export const ModalImg = styled.img`
     margin-bottom: 10px;
     border-radius: 10px;
-`
+`;

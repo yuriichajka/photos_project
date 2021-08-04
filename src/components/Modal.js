@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Col, Form, Row, Button } from 'react-bootstrap';
+import { useLocation, useParams } from 'react-router-dom';
+
 import { Background, ModalWrapper, CloseModalButton, ModalContainer, Comments, Comment, ModalImg } from '../styled/styledModal'
-import { Col, Form, Row, Button } from "react-bootstrap";
 
 
-export default function Modal({showModal, setShowModal}) {
+const Modal = ({ showModal, setShowModal }) => {
+
+    let { id } = useParams();
+    let location = useLocation();
+    console.log(location.pathname)
+
+    let [modalPhoto, setModalPhoto] = useState(null)
+    useEffect(() => {
+        fetch('https://boiling-refuge-66454.herokuapp.com/images/' + id)
+            .then(value => value.json())
+            .then(value => {
+                setModalPhoto(value)
+        })
+    }, [id])
+
+    console.log(id)
     return (
         <>
             {showModal ? (
@@ -12,7 +29,7 @@ export default function Modal({showModal, setShowModal}) {
                             <ModalContainer>
                                <Row>
                                    <Col>
-                                       <ModalImg src='https://picsum.photos/id/240/300/200' width='400px'/>
+                                       <ModalImg src={modalPhoto.url} width='400px'/>
                                        <Form className="d-grid gap-2">
                                            <Form.Control placeholder="Name" />
                                            <Form.Control placeholder="Comment" />
@@ -23,7 +40,7 @@ export default function Modal({showModal, setShowModal}) {
                                        <Comments>
                                            <Comment>
                                                <p className="name">Johnny First</p>
-                                               <p className="comment">cafafaasd</p>
+                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, reprehenderit.</p>
                                            </Comment>
                                            <Comment>
                                                <p className="name">Johnny Second</p>
@@ -40,3 +57,5 @@ export default function Modal({showModal, setShowModal}) {
         </>
     )
 }
+
+export default Modal;
