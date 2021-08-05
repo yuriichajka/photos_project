@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from './GlobalStyles';
 import Modal from './components/Modal';
-import { Img } from './styled/styledPhotos';
+import Image from './components/Image';
 
-
-
+import { getPhotos } from './services/api';
 
 const App = () => {
 
-  let [images, setImages] = useState([]);
-  useEffect(() => {
-    fetch('https://boiling-refuge-66454.herokuapp.com/images')
-        .then(value => value.json())
-        .then(value => {
-          setImages(value)
-        })
-  }, [])
+  const { photos } = useSelector(state => state);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    getPhotos().then(value => dispatch({type: 'SET_PHOTOS', payload: value.data}))
+  }, [dispatch])
 
 
     let [showModal, setShowModal] = useState(false);
@@ -39,7 +36,7 @@ const App = () => {
                 <Row className="justify-content-md-center">
                     <Col lg={9} className='center'>
                         {
-                            images.map(value => <Link to={'/photo/' + value.id}><Img src={value.url} alt="some" key={value.id} onClick={openModal}/></Link>)
+                            photos.map(value => <Link to={'/photo/' + value.id}><Image item={value.url} key={value.id} onClick={openModal}/></Link>)
                         }
                     </Col>
                 </Row>

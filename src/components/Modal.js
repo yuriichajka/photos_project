@@ -4,6 +4,8 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { Background, ModalWrapper, CloseModalButton, ModalContainer, Comments, Comment, ModalImg } from '../styled/styledModal'
 
+import { getPhoto } from '../services/api';
+
 
 const Modal = ({ showModal, setShowModal }) => {
 
@@ -11,25 +13,22 @@ const Modal = ({ showModal, setShowModal }) => {
     let location = useLocation();
     console.log(location.pathname)
 
-    let [modalPhoto, setModalPhoto] = useState(null)
+
+
+    let [modalPhoto, setModalPhoto] = useState(false)
     useEffect(() => {
-        fetch('https://boiling-refuge-66454.herokuapp.com/images/' + id)
-            .then(value => value.json())
-            .then(value => {
-                setModalPhoto(value)
-        })
+        getPhoto(id).then(value => setModalPhoto(value.data))
     }, [id])
 
-    console.log(id)
     return (
         <>
-            {showModal ? (
+            { showModal ? (
                     <Background>
-                        <ModalWrapper showModal={showModal}>
+                        <ModalWrapper showModal={ showModal }>
                             <ModalContainer>
                                <Row>
                                    <Col>
-                                       <ModalImg src={modalPhoto.url} width='400px'/>
+                                       <ModalImg src={ modalPhoto.url } width='400px'/>
                                        <Form className="d-grid gap-2">
                                            <Form.Control placeholder="Name" />
                                            <Form.Control placeholder="Comment" />
