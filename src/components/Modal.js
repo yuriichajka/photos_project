@@ -9,11 +9,8 @@ import { getPhoto } from '../services/api';
 
 const Modal = ({ showModal, setShowModal }) => {
 
-    let { id } = useParams();
-    let location = useLocation();
-    console.log(location.pathname)
-
-
+    const { id } = useParams();
+    const location = useLocation();
 
     let [modalPhoto, setModalPhoto] = useState(false)
     useEffect(() => {
@@ -22,13 +19,13 @@ const Modal = ({ showModal, setShowModal }) => {
 
     return (
         <>
-            { showModal ? (
+            { showModal && (
                     <Background>
                         <ModalWrapper showModal={ showModal }>
                             <ModalContainer>
                                <Row>
                                    <Col>
-                                       <ModalImg src={ modalPhoto.url } width='400px'/>
+                                       <ModalImg loading="lazy" src={ modalPhoto.url } width='400px' height='300px'/>
                                        <Form className="d-grid gap-2">
                                            <Form.Control placeholder="Name" />
                                            <Form.Control placeholder="Comment" />
@@ -52,7 +49,7 @@ const Modal = ({ showModal, setShowModal }) => {
                             <CloseModalButton arial-label='Close modal' onClick={() => setShowModal(prev => !prev)}/>
                         </ModalWrapper>
                     </Background>
-            ) : null}
+            )}
         </>
     )
 }

@@ -10,20 +10,17 @@ import Image from './components/Image';
 import { getPhotos } from './services/api';
 
 const App = () => {
-
   const { photos } = useSelector(state => state);
   const dispatch = useDispatch();
+  let [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getPhotos().then(value => dispatch({type: 'SET_PHOTOS', payload: value.data}))
   }, [dispatch])
 
-
-    let [showModal, setShowModal] = useState(false);
     const openModal = () => {
         setShowModal(prev => !prev)
     }
-
 
   return (
     <>
@@ -31,21 +28,21 @@ const App = () => {
             <Switch>
                 <Route exact path={'/photo/:id'} render={() => <Modal showModal={showModal} setShowModal={setShowModal}/>}/>
             </Switch>
-
             <Container>
                 <Row className="justify-content-md-center">
                     <Col lg={9} className='center'>
                         {
-                            photos.map(value => <Link to={'/photo/' + value.id}><Image item={value.url} key={value.id} onClick={openModal}/></Link>)
+                            photos.map(value =>
+                                <Link to={'/photo/' + value.id}>
+                                    <Image item={value.url} key={value.id} onClick={openModal}/>
+                                </Link>)
                         }
                     </Col>
                 </Row>
             </Container>
-
             <GlobalStyles/>
         </Router>
     </>
   );
 }
-
 export default App;

@@ -1,9 +1,8 @@
 const initialState = {
     photos: [],
-    showModal: false,
 }
 
-const reducer = (state = initialState, action) => {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_PHOTOS':
             return {...state, photos: [...action.payload]}
@@ -11,7 +10,5 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export const setPhotos = payload => ({type: 'SET_PHOTOS', payload})
 
 export { reducer }
