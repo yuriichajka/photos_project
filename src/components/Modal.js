@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Form, Row, Button } from 'react-bootstrap';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import {getPhoto} from "../services/api";
 
 import { Background, ModalWrapper, CloseModalButton, ModalContainer, Comments, Comment, ModalImg } from '../styled/styledModal'
-
-import { getPhoto } from '../services/api';
-
 
 const Modal = ({ showModal, setShowModal }) => {
 
     const { id } = useParams();
-    const location = useLocation();
 
     let [modalPhoto, setModalPhoto] = useState(false)
     useEffect(() => {

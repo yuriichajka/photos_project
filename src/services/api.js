@@ -1,13 +1,11 @@
 import axios from 'axios';
 
-let axiosInstance = axios.create({baseURL: 'https://boiling-refuge-66454.herokuapp.com'});
-
-const getPhotos = () => {
-    return axiosInstance.get('/images')
-}
+let axiosInstance = axios.create({
+    baseURL: 'https://boiling-refuge-66454.herokuapp.com/images'
+})
 
 const getPhoto = (id) => {
-    return axiosInstance.get('/images/' + id)
+    return axiosInstance.get(id)
 }
 
-export { getPhotos, getPhoto }
+export { getPhoto }

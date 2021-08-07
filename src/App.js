@@ -7,16 +7,20 @@ import { GlobalStyles } from './GlobalStyles';
 import Modal from './components/Modal';
 import Image from './components/Image';
 
-import { getPhotos } from './services/api';
+import { getImages } from './redux/ducks/images';
+
 
 const App = () => {
-  const { photos } = useSelector(state => state);
+
   const dispatch = useDispatch();
+
   let [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    getPhotos().then(value => dispatch({type: 'SET_PHOTOS', payload: value.data}))
+    dispatch(getImages())
   }, [dispatch])
+
+    const images = useSelector((state) => state.images.images)
 
     const openModal = () => {
         setShowModal(prev => !prev)
@@ -32,7 +36,7 @@ const App = () => {
                 <Row className="justify-content-md-center">
                     <Col lg={9} className='center'>
                         {
-                            photos.map(value =>
+                            images.map(value =>
                                 <Link to={'/photo/' + value.id}>
                                     <Image item={value.url} key={value.id} onClick={openModal}/>
                                 </Link>)
