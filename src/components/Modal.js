@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Form, Row, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import {Formik} from "formik";
+import { Formik } from 'formik';
 import * as yup from 'yup'
 
-import {getPhoto} from "../services/api";
+import { getPhoto } from '../services/api';
 
 import { Background, ModalWrapper, CloseModalButton, ModalContainer, Comments, Comment, ModalImg } from '../styled/styledModal'
 
 const Modal = ({ showModal, setShowModal }) => {
 
     const validations = yup.object().shape({
-        name: yup.string().typeError('Must be a string').required('Please write something'),
-        comment: yup.string().typeError('Must be a string').required('Please write something')
+        name: yup.string()
+            .typeError('Must be a string')
+            .required('Please write something')
+            .min(3, 'Must be at least 3 characters')
+            .max(15, 'Must be 15 characters or less'),
+        comment: yup.string()
+            .typeError('Must be a string')
+            .required('Please write something')
+            .min(3, 'Must be at least 3 characters')
+            .max(50, 'Must be 50 characters or less')
     })
 
     const { id } = useParams();
@@ -37,7 +45,7 @@ const Modal = ({ showModal, setShowModal }) => {
                                        }}
                                                validateOnBlur
                                                onSubmit={ (values) => {console.log(values) }}
-                                               validationSchema={validations}
+                                               validationSchema={ validations }
                                        >
                                            {({ values,
                                                  errors,
@@ -48,26 +56,26 @@ const Modal = ({ showModal, setShowModal }) => {
                                                  handleSubmit,
                                                  dirty}) => (
                                                <Form className="d-grid gap-2">
-                                                   <Form.Control type={`text`}
-                                                                 name={`name`}
-                                                                 onChange={handleChange}
-                                                                 onBlur={handleBlur}
-                                                                 value={values.name}
+                                                   <Form.Control type={ `text` }
+                                                                 name={ `name` }
+                                                                 onChange={ handleChange }
+                                                                 onBlur={ handleBlur }
+                                                                 value={ values.name }
                                                                  placeholder="Name" />
                                                    { touched.name && errors.name && <p>{errors.name}</p> }
                                                    <Form.Control placeholder="Comment"
-                                                                 type={`coment`}
-                                                                 name={`comment`}
-                                                                 onChange={handleChange}
-                                                                 onBlur={handleBlur}
-                                                                 value={values.comment} />
-                                                   { touched.comment && errors.comment && <p>{errors.comment}</p> }
+                                                                 type={ `comment` }
+                                                                 name={ `comment` }
+                                                                 onChange={ handleChange }
+                                                                 onBlur={ handleBlur }
+                                                                 value={ values.comment } />
+                                                   { touched.comment && errors.comment && <p>{ errors.comment }</p> }
                                                    <Button
                                                        size="lg"
-                                                       style={{marginBottom: '30px'}}
-                                                       disabled={!isValid && !dirty}
-                                                       onClick={handleSubmit}
-                                                       type={`submit`}
+                                                       style={{ marginBottom: '30px' }}
+                                                       disabled={ !isValid && !dirty }
+                                                       onClick={ handleSubmit }
+                                                       type={ `submit` }
                                                    >Post</Button>
                                                </Form>
                                            )}
