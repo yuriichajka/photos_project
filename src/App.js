@@ -4,43 +4,42 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from './GlobalStyles';
-import Modal from './components/Modal';
-import Image from './components/Image';
+import { Modal, Image } from './components/index'
 
 import { getImages } from './redux/ducks/images';
 
-
 const App = () => {
-
   const dispatch = useDispatch();
 
   let [showModal, setShowModal] = useState(false);
 
+  const images = useSelector((state) => state.images.images);
+
+  const openModal = () => {
+      setShowModal(prev => !prev);
+  }
+
   useEffect(() => {
-    dispatch(getImages())
-  }, [dispatch])
-
-    const images = useSelector((state) => state.images.images)
-
-    const openModal = () => {
-        setShowModal(prev => !prev)
-    }
+      dispatch(getImages())
+  }, [dispatch]);
 
   return (
     <>
         <Router>
             <Switch>
-                <Route exact path={'/photo/:id'} render={() => <Modal showModal={showModal} setShowModal={setShowModal}/>}/>
+                <Route exact path={'/photo/:id'} render={() => <Modal showModal={showModal}
+                                                                      setShowModal={setShowModal}
+                                                                />}
+                />
             </Switch>
             <Container>
                 <Row className="justify-content-md-center">
                     <Col lg={9} className='center'>
-                        {
-                            images.map(value =>
+                        {images.map(value => (
                                 <Link to={'/photo/' + value.id}>
-                                    <Image item={value.url} key={value.id} onClick={openModal}/>
-                                </Link>)
-                        }
+                                    <Image item={value.url} key={value.id} onClick={openModal} />
+                                </Link>
+                        ))}
                     </Col>
                 </Row>
             </Container>
@@ -49,4 +48,5 @@ const App = () => {
     </>
   );
 }
+
 export default App;

@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
 
-import photoReducer from './ducks/images'
+import photoReducer from './ducks/images';
 
-import { watcherSaga } from './sagas/rootSaga';
+import { watcherSaga } from './rootSaga';
 
 const reducer = combineReducers({
     images: photoReducer

@@ -1,11 +1,13 @@
 import { MdClose } from 'react-icons/md';
 
+import { COLORS, SIZES } from '../globalVariables';
+
 import styled from 'styled-components';
 
 export const Background = styled.div`
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    width: ${SIZES.width100per};
+    height: ${SIZES.height100per};
+    background: ${COLORS.dark};
     position: fixed;
     display: flex;
     justify-content: center;
@@ -23,17 +25,17 @@ export const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 export const ModalWrapper = styled.div`
-    width: 800px;
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-    color: #000;
-    background: #fff;
+    width: ${SIZES.width800px};
+    box-shadow: ${COLORS.silverBox};
+    color: ${COLORS.black};
+    background: ${COLORS.white};
     position: relative;
     z-index: 10;
     border-radius: 10px;
 `
 
 export const ModalContainer = styled.div`
-    width: 90%;
+    width: ${SIZES.width90per};
     margin: 0 auto;
     margin-top: 30px;
 `
@@ -45,7 +47,7 @@ export const Comments = styled.div`
       margin: 0;
     }
     p.name {
-      color: gainsboro;
+      color: ${COLORS.silver};
     }
 `
 
