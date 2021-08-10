@@ -1,52 +1,54 @@
-import './App.css';
-import {useEffect, useState} from "react";
-import Modal from "./components/Modal";
-import {GlobalStyles} from "./globalStyles";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 20px;
-  text-align: center;
-`
+import { GlobalStyles } from './GlobalStyles';
+import { Modal, Image } from './components/index'
 
+import { getImages } from './redux/ducks/images';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
 
-  let [images, setImages] = useState([]);
+  let [showModal, setShowModal] = useState(false);
+
+  const images = useSelector((state) => state.images.images);
+
+  const openModal = () => {
+      setShowModal(prev => !prev);
+  }
+
   useEffect(() => {
-    fetch('https://boiling-refuge-66454.herokuapp.com/images')
-        .then(value => value.json())
-        .then(value => {
-          setImages(value)
-        })
-  }, [])
-
-
-    let [showModal, setShowModal] = useState(false);
-    const openModal = (e) => {
-        setShowModal(prev => !prev )
-        console.log(e)
-    }
-
-
-
-
+      dispatch(getImages())
+  }, [dispatch]);
 
   return (
     <>
-        <Container>
-      {
-        images.map(value => <div>
-          <img onClick={() => openModal(value.url)} src={value.url} alt='da'/>
-        </div>)
-      }
-
-            <Modal showModal={showModal} setShowModal={setShowModal} />
+        <Router>
+            <Switch>
+                <Route
+                    exact
+                    path={'/photo/:id'}
+                    render={() => (
+                        <Modal showModal={showModal}
+                               setShowModal={setShowModal}
+                        />)}
+                />
+            </Switch>
+            <Container>
+                <Row className="justify-content-md-center">
+                    <Col lg={9} className='center'>
+                        {images.map(value => (
+                                <Link to={'/photo/' + value.id}>
+                                    <Image item={value.url} key={value.id} onClick={openModal} />
+                                </Link>
+                        ))}
+                    </Col>
+                </Row>
+            </Container>
             <GlobalStyles/>
-        </Container>
+        </Router>
     </>
   );
 }

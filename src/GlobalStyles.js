@@ -1,4 +1,4 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -7,4 +7,8 @@ export const GlobalStyles = createGlobalStyle`
       padding: 0;
       font-family: 'Arial', sans-serif;
     }
-`
+    
+    .center {
+      text-align: center;
+    }
+`;

@@ -1,123 +1,107 @@
-import React, {useState} from "react";
-import styled from "styled-components";
-import {MdClose} from 'react-icons/md'
+import React, { useEffect, useState } from 'react';
+import { Col, Form, Row, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
-const Background = styled.div`
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-const ModalWrapper = styled.div`
-    width: 800px;
-    height: 500px;
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-    color: #000;
-    background: #fff;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    position: relative;
-    z-index: 10;
-    border-radius: 10px;
-`
+import { getPhoto } from '../api';
 
-const ModalContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    align-items: center;
-    line-height: 1.8;
-    color: #141414;
-  
-  button {
-    padding: 10px 24px;
-    background: #141414;
-    color: #fff;
-    border: none;
-    width: 75%;
-    margin-top: 10px;
-  }
-  
-  input {
-    width: 75%;
-    margin: 10px 0;
-    padding: 5px;
-  }
-  
-  img {
-    margin-bottom: 20px;
-  }
-`
+import {
+    Background, ModalWrapper,
+    CloseModalButton, ModalContainer,
+    Comments, Comment, ModalImg
+} from '../styled/styledModal';
+import { NAME_VAL, COMMENT_VAL } from '../validators';
 
-const CloseModalButton = styled(MdClose)`
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    z-index: 10;
-`
+const Modal = ({ showModal, setShowModal }) => {
+    const validations = yup.object().shape({
+        name: NAME_VAL,
+        comment: COMMENT_VAL
+    });
 
-const Comments = styled.div`
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  
-  p {
-    text-align: left;
-    margin-top: 10px;
-  }
-  
-  div {
-    text-align: left;
-    color: darkgray;
-  }
-`
+    const { id } = useParams();
 
-
-export default function Modal({showModal, setShowModal}) {
-
-    let [name, setName] = useState('')
-    let [comm, setComm] = useState('')
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if (!name || !comm) return
-
-        console.log(name,comm);
-    }
+    let [modalPhoto, setModalPhoto] = useState(false);
+    useEffect(() => {
+        getPhoto(id).then(value => setModalPhoto(value.data))
+    }, [id]);
 
     return (
         <>
-            {showModal ? (
-                <Background>
-                    <ModalWrapper showModal={showModal}>
-                        <ModalContent>
-                            <img src='https://picsum.photos/id/240/300/200' alt="pic" width='400px'/>
-                            <form onSubmit={handleSubmit}>
-                                <input type="text" value={name} onChange={({target: {value}}) => setName(value)} placeholder='Ваше имя'/>
-                                <input type="text" value={comm} onChange={({target: {value}}) => setComm(value)} placeholder='Ваш комментарий'/>
-                                <button disabled={!name || !comm}>Оставить отзыв</button>
-                            </form>
-                        </ModalContent>
-                        <CloseModalButton aria-label='Close modal' onClick={() => setShowModal(prev => !prev)}/>
-                        <Comments>
-                            <div>Lorem ipsum.</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, saepe.</p>
-                            <br/>
-                            <div>Lorem ipsum.</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, saepe.</p>
-                        </Comments>
-                    </ModalWrapper>
-                </Background>
-            ) : null}
+            { showModal && (
+                    <Background>
+                        <ModalWrapper showModal={ showModal }>
+                            <ModalContainer>
+                               <Row>
+                                   <Col>
+                                       <ModalImg loading="lazy" src={ modalPhoto.url } width='400px' height='300px'/>
+                                       <Formik
+                                           initialValues={{
+                                                name: '',
+                                                comment: ''
+                                           }}
+                                           validateOnBlur
+                                           onSubmit={ (values) => {console.log(values) }}
+                                           validationSchema={ validations }
+                                       >
+                                           {({ values,
+                                                 errors,
+                                                 touched,
+                                                 handleChange,
+                                                 handleBlur,
+                                                 isValid,
+                                                 handleSubmit,
+                                                 dirty}) => (
+                                               <Form className="d-grid gap-2">
+                                                   <Form.Control
+                                                       type={ `text` }
+                                                       name={ `name` }
+                                                       onChange={ handleChange }
+                                                       onBlur={ handleBlur }
+                                                       value={ values.name }
+                                                       placeholder="Name"
+                                                   />
+                                                   { touched.name && errors.name && <p>{errors.name}</p> }
+                                                   <Form.Control
+                                                       placeholder="Comment"
+                                                       type={ `comment` }
+                                                       name={ `comment` }
+                                                       onChange={ handleChange }
+                                                       onBlur={ handleBlur }
+                                                       value={ values.comment }
+                                                   />
+                                                   { touched.comment && errors.comment && <p>{ errors.comment }</p> }
+                                                   <Button
+                                                       size="lg"
+                                                       style={{ marginBottom: '30px' }}
+                                                       disabled={ !isValid && !dirty }
+                                                       onClick={ handleSubmit }
+                                                       type={ `submit` }
+                                                   >Post</Button>
+                                               </Form>
+                                           )}
+                                       </Formik>
+                                   </Col>
+                                   <Col>
+                                       <Comments>
+                                           <Comment>
+                                               <p className="name">Johnny First</p>
+                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, reprehenderit.</p>
+                                           </Comment>
+                                           <Comment>
+                                               <p className="name">Johnny Second</p>
+                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eligendi.</p>
+                                           </Comment>
+                                       </Comments>
+                                   </Col>
+                               </Row>
+                            </ModalContainer>
+                            <CloseModalButton arial-label='Close modal' onClick={() => setShowModal(prev => !prev)}/>
+                        </ModalWrapper>
+                    </Background>
+            )}
         </>
-    );
-};
+    )
+}
+
+export default Modal;
