@@ -26,7 +26,7 @@ export function* handleGetImages(action) {
     } catch (error) {
         console.log(error)
     }
-};
+}
 
 export default (state = initialState, action) => {
     switch (action.type) {

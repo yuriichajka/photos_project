@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const PATH = 'https://boiling-refuge-66454.herokuapp.com/images'
+
 let axiosInstance = axios.create({
-    baseURL: 'https://boiling-refuge-66454.herokuapp.com/images'
+    baseURL: PATH
 })
 
 const getPhoto = (id) => {
@@ -11,7 +13,7 @@ const getPhoto = (id) => {
 export function requestGetImages() {
     return axios.request({
         method: 'get',
-        url: 'https://boiling-refuge-66454.herokuapp.com/images'
+        url: PATH
     })
 }
 

@@ -6,9 +6,11 @@ import * as yup from 'yup';
 
 import { getPhoto } from '../api';
 
-import { Background, ModalWrapper,
+import {
+    Background, ModalWrapper,
     CloseModalButton, ModalContainer,
-    Comments, Comment, ModalImg } from '../styled/styledModal';
+    Comments, Comment, ModalImg
+} from '../styled/styledModal';
 import { NAME_VAL, COMMENT_VAL } from '../validators';
 
 const Modal = ({ showModal, setShowModal }) => {
@@ -19,7 +21,7 @@ const Modal = ({ showModal, setShowModal }) => {
 
     const { id } = useParams();
 
-    let [modalPhoto, setModalPhoto] = useState(false)
+    let [modalPhoto, setModalPhoto] = useState(false);
     useEffect(() => {
         getPhoto(id).then(value => setModalPhoto(value.data))
     }, [id]);

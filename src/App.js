@@ -27,9 +27,13 @@ const App = () => {
     <>
         <Router>
             <Switch>
-                <Route exact path={'/photo/:id'} render={() => <Modal showModal={showModal}
-                                                                      setShowModal={setShowModal}
-                                                                />}
+                <Route
+                    exact
+                    path={'/photo/:id'}
+                    render={() => (
+                        <Modal showModal={showModal}
+                               setShowModal={setShowModal}
+                        />)}
                 />
             </Switch>
             <Container>
