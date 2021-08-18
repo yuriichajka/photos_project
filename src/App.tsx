@@ -4,16 +4,17 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from './GlobalStyles';
-import { Modal, Image } from './components/index'
+import { Modal, Image } from './components'
 
-import { getImages } from './redux/ducks/images';
+import {getImages} from './redux/ducks/images';
+import {RootState} from "./redux/configureStore";
 
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useDispatch();
 
   let [showModal, setShowModal] = useState(false);
 
-  const images = useSelector((state) => state.images.images);
+  const images = useSelector((state: RootState) => state.images.images);
 
   const openModal = () => {
       setShowModal(prev => !prev);
@@ -23,7 +24,7 @@ const App = () => {
       dispatch(getImages())
   }, [dispatch]);
 
-  return (
+    return (
     <>
         <Router>
             <Switch>
@@ -31,8 +32,8 @@ const App = () => {
                     exact
                     path={'/photo/:id'}
                     render={() => (
-                        <Modal showModal={showModal}
-                               setShowModal={setShowModal}
+                        <Modal showModal={() => showModal}
+                               setShowModal={() => setShowModal}
                         />)}
                 />
             </Switch>

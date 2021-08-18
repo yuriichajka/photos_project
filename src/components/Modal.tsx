@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { Col, Form, Row, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -13,15 +13,25 @@ import {
 } from '../styled/styledModal';
 import { NAME_VAL, COMMENT_VAL } from '../validators';
 
-const Modal = ({ showModal, setShowModal }) => {
+interface ModalProps {
+    showModal(prev: boolean): void
+    setShowModal(prev: (prev) => boolean) : void
+}
+
+export interface IImages {
+    id?: number
+    url?: string
+}
+
+const Modal: React.FC<ModalProps> = ({ showModal, setShowModal }) => {
     const validations = yup.object().shape({
         name: NAME_VAL,
         comment: COMMENT_VAL
     });
 
-    const { id } = useParams();
+    const { id } = useParams<any>();
 
-    let [modalPhoto, setModalPhoto] = useState(false);
+    let [modalPhoto, setModalPhoto] = useState<IImages>({});
     useEffect(() => {
         getPhoto(id).then(value => setModalPhoto(value.data))
     }, [id]);
@@ -75,7 +85,7 @@ const Modal = ({ showModal, setShowModal }) => {
                                                        size="lg"
                                                        style={{ marginBottom: '30px' }}
                                                        disabled={ !isValid && !dirty }
-                                                       onClick={ handleSubmit }
+                                                       onClick={ () => handleSubmit }
                                                        type={ `submit` }
                                                    >Post</Button>
                                                </Form>
@@ -86,7 +96,7 @@ const Modal = ({ showModal, setShowModal }) => {
                                        <Comments>
                                            <Comment>
                                                <p className="name">Johnny First</p>
-                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, reprehenderit.</p>
+                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elite. Quisquam, reprehenderit.</p>
                                            </Comment>
                                            <Comment>
                                                <p className="name">Johnny Second</p>

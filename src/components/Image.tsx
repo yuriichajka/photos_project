@@ -2,7 +2,13 @@ import React from 'react';
 
 import { Img } from '../styled/styledPhotos';
 
-const Image = ({ item, onClick }) => (
+interface ImageProps {
+    item: string | undefined
+    onClick(): void
+}
+
+
+const Image: React.FC<ImageProps> = ({item, onClick}) => (
     <Img
         loading='lazy'
         width='300px'

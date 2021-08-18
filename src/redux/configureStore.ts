@@ -9,6 +9,8 @@ const reducer = combineReducers({
     images: photoReducer
 });
 
+export type RootState = ReturnType<typeof reducer>
+
 const sagaMiddleware = createSagaMiddleware();
 
 const middleware = [sagaMiddleware];
