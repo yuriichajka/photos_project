@@ -28,10 +28,14 @@ export function* handleGetImages() {
     }
 }
 
-export default (state = initialState, action) => {
+interface IAction {
+    type: string
+    images: any
+}
+
+export default (state = initialState, action: IAction) => {
     switch (action.type) {
         case SET_IMAGES:
-            // const { images } = action;
             return { ...state, images: action.images}
         default:
             return state

@@ -6,8 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GlobalStyles } from './GlobalStyles';
 import { Modal, Image } from './components'
 
-import {getImages} from './redux/ducks/images';
-import {RootState} from "./redux/configureStore";
+import { getImages } from './redux/ducks/images';
+import { RootState } from './redux/configureStore';
+
+export interface IContext  {
+    showModal: boolean
+    toggleModal: () => void
+}
+// @ts-ignore
+export const ModalContext = React.createContext<IContext>()
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,8 +23,8 @@ const App: React.FC = () => {
 
   const images = useSelector((state: RootState) => state.images.images);
 
-  const openModal = () => {
-      setShowModal(prev => !prev);
+  const toggleModal = () => {
+      setShowModal((previousState) => !previousState);
   }
 
   useEffect(() => {
@@ -25,16 +32,15 @@ const App: React.FC = () => {
   }, [dispatch]);
 
     return (
-    <>
+    <ModalContext.Provider value={{ showModal, toggleModal }}>
         <Router>
             <Switch>
                 <Route
                     exact
                     path={'/photo/:id'}
                     render={() => (
-                        <Modal showModal={() => showModal}
-                               setShowModal={() => setShowModal}
-                        />)}
+                        <Modal />
+                    )}
                 />
             </Switch>
             <Container>
@@ -42,7 +48,7 @@ const App: React.FC = () => {
                     <Col lg={9} className='center'>
                         {images.map(value => (
                                 <Link to={'/photo/' + value.id}>
-                                    <Image item={value.url} key={value.id} onClick={openModal} />
+                                    <Image item={value.url} key={value.id} onClick={toggleModal} />
                                 </Link>
                         ))}
                     </Col>
@@ -50,7 +56,7 @@ const App: React.FC = () => {
             </Container>
             <GlobalStyles/>
         </Router>
-    </>
+    </ModalContext.Provider>
   );
 }
 

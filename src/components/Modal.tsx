@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Col, Form, Row, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -12,18 +12,19 @@ import {
     Comments, Comment, ModalImg
 } from '../styled/styledModal';
 import { NAME_VAL, COMMENT_VAL } from '../validators';
-
-interface ModalProps {
-    showModal(prev: boolean): void
-    setShowModal(prev: (prev) => boolean) : void
-}
+import { IContext, ModalContext } from '../App';
 
 export interface IImages {
     id?: number
     url?: string
 }
 
-const Modal: React.FC<ModalProps> = ({ showModal, setShowModal }) => {
+const Modal: React.FC = () => {
+
+    const modalContext = useContext<IContext>(ModalContext)
+
+    const { showModal, toggleModal } = modalContext;
+
     const validations = yup.object().shape({
         name: NAME_VAL,
         comment: COMMENT_VAL
@@ -51,7 +52,7 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal }) => {
                                                 comment: ''
                                            }}
                                            validateOnBlur
-                                           onSubmit={ (values) => {console.log(values) }}
+                                           onSubmit={ (values) => { console.log(values) }}
                                            validationSchema={ validations }
                                        >
                                            {({ values,
@@ -85,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal }) => {
                                                        size="lg"
                                                        style={{ marginBottom: '30px' }}
                                                        disabled={ !isValid && !dirty }
-                                                       onClick={ () => handleSubmit }
+                                                       onClick={ handleSubmit }
                                                        type={ `submit` }
                                                    >Post</Button>
                                                </Form>
@@ -96,17 +97,24 @@ const Modal: React.FC<ModalProps> = ({ showModal, setShowModal }) => {
                                        <Comments>
                                            <Comment>
                                                <p className="name">Johnny First</p>
-                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elite. Quisquam, reprehenderit.</p>
+                                               <p className="comment">
+                                                   Lorem ipsum dolor sit amet,
+                                                   consectetur adipisicing elite.
+                                                   Quisquam, reprehenderit.
+                                               </p>
                                            </Comment>
                                            <Comment>
-                                               <p className="name">Johnny Second</p>
-                                               <p className="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eligendi.</p>
+                                               <p className="name">Johnny First</p>
+                                               <p className="comment">
+                                                   Lorem ipsum dolor sit amet,
+                                                   consectetur adipisicing elite.
+                                                   Quisquam, reprehenderit.</p>
                                            </Comment>
                                        </Comments>
                                    </Col>
                                </Row>
                             </ModalContainer>
-                            <CloseModalButton arial-label='Close modal' onClick={() => setShowModal(prev => !prev)}/>
+                            <CloseModalButton arial-label='Close modal' onClick={ toggleModal }/>
                         </ModalWrapper>
                     </Background>
             )}

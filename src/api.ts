@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IImages } from './components/Modal';
 
 const PATH = 'https://boiling-refuge-66454.herokuapp.com/images'
 
@@ -11,7 +12,7 @@ const getPhoto = (id) => {
 }
 
 export function requestGetImages() {
-    return axios.request({
+    return axios.request<IImages>({
         method: 'get',
         url: PATH
     })

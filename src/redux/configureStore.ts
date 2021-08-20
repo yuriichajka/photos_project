@@ -6,7 +6,7 @@ import photoReducer from './ducks/images';
 import { watcherSaga } from './rootSaga';
 
 const reducer = combineReducers({
-    images: photoReducer
+    images: photoReducer,
 });
 
 export type RootState = ReturnType<typeof reducer>
