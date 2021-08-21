@@ -10,9 +10,10 @@ import { getImages } from './redux/ducks/images';
 import { RootState } from './redux/configureStore';
 
 export interface IContext  {
-    showModal: boolean
-    toggleModal: () => void
-}
+    showModal?: boolean;
+    toggleModal?: () => void;
+};
+
 // @ts-ignore
 export const ModalContext = React.createContext<IContext>()
 

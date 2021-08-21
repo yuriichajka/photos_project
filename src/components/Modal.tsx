@@ -15,9 +15,9 @@ import { NAME_VAL, COMMENT_VAL } from '../validators';
 import { IContext, ModalContext } from '../App';
 
 export interface IImages {
-    id?: number
-    url?: string
-}
+    id?: number;
+    url?: string;
+};
 
 const Modal: React.FC = () => {
 
@@ -86,7 +86,7 @@ const Modal: React.FC = () => {
                                                        size="lg"
                                                        style={{ marginBottom: '30px' }}
                                                        disabled={ !isValid && !dirty }
-                                                       onClick={ handleSubmit }
+                                                       onClick={ () => handleSubmit }
                                                        type={ `submit` }
                                                    >Post</Button>
                                                </Form>

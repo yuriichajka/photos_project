@@ -29,9 +29,9 @@ export function* handleGetImages() {
 }
 
 interface IAction {
-    type: string
-    images: any
-}
+    type: string;
+    images?: any;
+};
 
 export default (state = initialState, action: IAction) => {
     switch (action.type) {
