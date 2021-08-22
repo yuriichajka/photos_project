@@ -3,8 +3,8 @@ import React from 'react';
 import { Img } from '../styled/styledPhotos';
 
 interface ImageProps {
-    item?: string
-    onClick(): void
+    item?: string;
+    onClick?: () => void;
 }
 
 const Image: React.FC<ImageProps> = ({item, onClick}) => (

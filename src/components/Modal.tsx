@@ -17,7 +17,7 @@ import { IContext, ModalContext } from '../App';
 export interface IImages {
     id?: number;
     url?: string;
-};
+}
 
 const Modal: React.FC = () => {
 
