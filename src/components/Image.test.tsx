@@ -6,6 +6,6 @@ describe('Image', () => {
    it('snapshot', () => {
        const wrapper = shallow(<Image />)
        expect(wrapper).toMatchSnapshot();
-   });
+   })
 })
 

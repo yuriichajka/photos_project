@@ -10,12 +10,14 @@ import { getImages } from './redux/ducks/images';
 import { RootState } from './redux/configureStore';
 
 export interface IContext  {
-    showModal?: boolean;
+    showModal: boolean;
     toggleModal?: () => void;
-};
+}
 
 // @ts-ignore
-export const ModalContext = React.createContext<IContext>()
+export const ModalContext = React.createContext<IContext>({
+    showModal: false
+})
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

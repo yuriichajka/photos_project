@@ -30,6 +30,7 @@ const Modal: React.FC = () => {
         comment: COMMENT_VAL
     });
 
+    // @ts-ignore
     const { id } = useParams<any>();
 
     let [modalPhoto, setModalPhoto] = useState<IImages>({});
@@ -63,7 +64,7 @@ const Modal: React.FC = () => {
                                                  isValid,
                                                  handleSubmit,
                                                  dirty}) => (
-                                               <Form className="d-grid gap-2">
+                                               <Form className="d-grid gap-2 commForm">
                                                    <Form.Control
                                                        type={ `text` }
                                                        name={ `name` }
