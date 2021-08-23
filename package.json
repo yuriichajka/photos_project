@@ -85,26 +85,9 @@
     ]
   },
   "jest": {
-    "unmockedModulePathPatterns": [
-      "node_modules/react/",
-      "node_modules/enzyme/"
-    ],
-    "verbose": true,
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "clearMocks": false,
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "clearMocks": false
   }
 }
