@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from './GlobalStyles';
