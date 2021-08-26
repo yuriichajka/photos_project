@@ -1,4 +1,4 @@
-import photoReducer, {initialState, SET_IMAGES} from "../redux/ducks/images";
+import photoReducer, { initialState, SET_IMAGES } from '../redux/ducks/images';
 
 describe('duck test', () => {
     it('SET_IMAGES', () => {

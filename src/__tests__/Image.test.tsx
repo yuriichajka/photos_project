@@ -1,6 +1,6 @@
-import React from "react";
-import {shallow} from "enzyme";
-import Image from "../components/Image";
+import React from 'react';
+import { shallow } from 'enzyme';
+import Image from '../components/Image';
 
 describe('Image', () => {
    it('snapshot', () => {
@@ -8,4 +8,3 @@ describe('Image', () => {
        expect(wrapper).toMatchSnapshot();
    })
 })
-
