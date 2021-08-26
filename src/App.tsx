@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { Link, MemoryRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from './GlobalStyles';
@@ -16,7 +16,7 @@ export interface IContext  {
 
 // @ts-ignore
 export const ModalContext = React.createContext<IContext>({
-    showModal: false
+    showModal: true
 })
 
 const App: React.FC = () => {
@@ -36,7 +36,7 @@ const App: React.FC = () => {
 
     return (
     <ModalContext.Provider value={{ showModal, toggleModal }}>
-        <Router>
+        <MemoryRouter>
             <Switch>
                 <Route
                     exact
@@ -58,7 +58,7 @@ const App: React.FC = () => {
                 </Row>
             </Container>
             <GlobalStyles/>
-        </Router>
+        </MemoryRouter>
     </ModalContext.Provider>
   );
 }

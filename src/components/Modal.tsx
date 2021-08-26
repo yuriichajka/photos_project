@@ -87,7 +87,8 @@ const Modal: React.FC = () => {
                                                        size="lg"
                                                        style={{ marginBottom: '30px' }}
                                                        disabled={ !isValid && !dirty }
-                                                       onClick={ () => handleSubmit }
+                                                       // @ts-ignore
+                                                       onClick={ handleSubmit }
                                                        type={ `submit` }
                                                    >Post</Button>
                                                </Form>
