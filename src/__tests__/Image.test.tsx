@@ -1,10 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+
 import Image from '../components/Image';
+
+import { shallow } from 'enzyme';
 
 describe('Image', () => {
    it('snapshot', () => {
        const wrapper = shallow(<Image />)
        expect(wrapper).toMatchSnapshot();
-   })
-})
+   });
+});

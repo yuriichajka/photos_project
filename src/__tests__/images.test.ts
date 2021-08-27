@@ -8,6 +8,6 @@ describe('duck test', () => {
         expect(photoReducer(initialState, action)).toEqual({
             ...initialState,
             images: undefined
-        })
-    })
-})
+        });
+    });
+});
