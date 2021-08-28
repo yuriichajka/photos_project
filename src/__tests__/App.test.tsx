@@ -19,7 +19,6 @@ describe('App snapshot',  () => {
 describe('Correct render', () => {
     beforeEach(() => {
         wrapper = mount(<Provider store={store}><App /></Provider>);
-        console.log(wrapper.debug());
     });
 
     it('should render something',  () => {

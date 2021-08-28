@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from '../components/Modal';
 
 import renderer from 'react-test-renderer'
-import { mount } from 'enzyme';
+import {mount, shallow, render} from 'enzyme';
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
@@ -30,15 +30,30 @@ describe("Correct render", () => {
         expect(wrapper).not.toBeNull();
     });
 
-    it('should render inputs',  () => {
+    it('should contain inputs',  () => {
         expect(wrapper.find('input')).toHaveLength(2);
     });
 
-    it('should render button',  () => {
+    it('should contain button',  () => {
         expect(wrapper.find('button')).toHaveLength(1);
     });
-
-    it('should render container',  () => {
-        expect(wrapper.find('.kjnLZx')).toHaveLength(1);
-    });
 });
+
+    describe('dad', () => {
+        it('should ',  () => {
+            const mockCallBack = jest.fn();
+            // @ts-ignore
+            const component = mount(<Modal onClick={mockCallBack} />);
+            component.find('button#test').simulate('click');
+            expect(mockCallBack).toBeCalledTimes(1);
+        });
+
+        // it('should ',  () => {
+        //     const mockCallBack = jest.fn();
+        //     // @ts-ignore
+        //     const component = mount(<Modal onChange={mockCallBack} />);
+        //     expect(mockCallBack.mock.calls.length).toEqual(0);
+        //     component.find('input#form1').simulate('click');
+        //     expect(mockCallBack.mock.calls.length).toEqual(1);
+        // });
+    })

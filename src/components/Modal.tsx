@@ -66,6 +66,7 @@ const Modal: React.FC = () => {
                                                  dirty}) => (
                                                <Form className="d-grid gap-2 commForm">
                                                    <Form.Control
+                                                       id="form1"
                                                        type={ `text` }
                                                        name={ `name` }
                                                        onChange={ handleChange }
@@ -75,6 +76,7 @@ const Modal: React.FC = () => {
                                                    />
                                                    { touched.name && errors.name && <p>{errors.name}</p> }
                                                    <Form.Control
+                                                       id="form2"
                                                        placeholder="Comment"
                                                        type={ `comment` }
                                                        name={ `comment` }
@@ -84,6 +86,7 @@ const Modal: React.FC = () => {
                                                    />
                                                    { touched.comment && errors.comment && <p>{ errors.comment }</p> }
                                                    <Button
+                                                       id="test"
                                                        size="lg"
                                                        style={{ marginBottom: '30px' }}
                                                        disabled={ !isValid && !dirty }
