@@ -34,7 +34,7 @@ const Modal: React.FC = () => {
     const { id } = useParams<any>();
 
     let [modalPhoto, setModalPhoto] = useState<IImages>({});
-    useEffect(() => {
+    React.useEffect(() => {
         getPhoto(id).then(value => setModalPhoto(value.data))
     }, [id]);
 

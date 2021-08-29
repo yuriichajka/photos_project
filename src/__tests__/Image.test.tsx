@@ -2,11 +2,13 @@ import React from 'react';
 
 import Image from '../components/Image';
 
-import { shallow } from 'enzyme';
+import {mount, shallow} from 'enzyme';
+import renderer from 'react-test-renderer'
 
-describe('Image', () => {
-   it('snapshot', () => {
-       const wrapper = shallow(<Image />)
-       expect(wrapper).toMatchSnapshot();
-   });
-});
+let wrapper;
+describe('Image snapshot',  () => {
+    it('should add a snapshot', () => {
+        wrapper = renderer.create(<Image/>).toJSON();
+        expect(wrapper).toMatchSnapshot();
+    })
+})

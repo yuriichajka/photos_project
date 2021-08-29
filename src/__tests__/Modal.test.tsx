@@ -40,20 +40,20 @@ describe("Correct render", () => {
 });
 
     describe('dad', () => {
-        it('should ',  () => {
-            const mockCallBack = jest.fn();
+        const getPhoto = jest.fn().mockImplementation(() => Promise.resolve());
+        let wrapper;
+        beforeEach(() => {
             // @ts-ignore
-            const component = mount(<Modal onClick={mockCallBack} />);
-            component.find('button#test').simulate('click');
-            expect(mockCallBack).toBeCalledTimes(1);
+            wrapper = mount(<Modal getPhoto={getPhoto}/>)
+        })
+
+        it('reree', () => {
+            expect(wrapper).not.toBeNull();
+
         });
 
-        // it('should ',  () => {
-        //     const mockCallBack = jest.fn();
-        //     // @ts-ignore
-        //     const component = mount(<Modal onChange={mockCallBack} />);
-        //     expect(mockCallBack.mock.calls.length).toEqual(0);
-        //     component.find('input#form1').simulate('click');
-        //     expect(mockCallBack.mock.calls.length).toEqual(1);
-        // });
+        it('should ',  () => {
+            wrapper.find('button').simulate('click');
+            expect(getPhoto).toBeCalledTimes(1)
+        });
     })
