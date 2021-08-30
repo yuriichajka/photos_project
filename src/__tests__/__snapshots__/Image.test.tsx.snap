@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal snapshot should add a snapshot 1`] = `
+exports[`Image snapshot should add a snapshot 1`] = `
 <img
   className="sc-bdnxRM hStcCx test"
   height="200px"

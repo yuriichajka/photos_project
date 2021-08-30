@@ -2,7 +2,6 @@ import React from 'react';
 
 import Image from '../components/Image';
 
-import {mount, shallow} from 'enzyme';
 import renderer from 'react-test-renderer'
 
 let wrapper;

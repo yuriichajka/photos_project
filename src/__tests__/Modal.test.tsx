@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from '../components/Modal';
 
 import renderer from 'react-test-renderer'
-import {mount, shallow, render} from 'enzyme';
+import { mount } from 'enzyme';
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
@@ -45,15 +45,15 @@ describe("Correct render", () => {
         beforeEach(() => {
             // @ts-ignore
             wrapper = mount(<Modal getPhoto={getPhoto}/>)
-        })
-
-        it('reree', () => {
-            expect(wrapper).not.toBeNull();
-
         });
 
-        it('should ',  () => {
-            wrapper.find('button').simulate('click');
-            expect(getPhoto).toBeCalledTimes(1)
+        afterEach(() => {
+            wrapper = null;
         });
-    })
+
+        it("should add name to first input field", () => {
+            wrapper.find("input#form1").simulate("change", { target: { value: "Charles" } });
+            expect(wrapper.find("input#form1").text()).toEqual("Charles");
+        });
+
+    });
