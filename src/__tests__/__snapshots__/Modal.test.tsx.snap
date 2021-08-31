@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal snapshot should add a snapshot 1`] = `
+<div
+  className="sc-bdnxRM kjnLZx"
+>
+  <div
+    className="sc-dlnjwi hWgIVS"
+  >
+    <div
+      className="sc-hKFxyN hAYNwM"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col"
+        >
+          <img
+            className="sc-gKAaRy cKygeM"
+            height="300px"
+            loading="lazy"
+            width="400px"
+          />
+          <form
+            className="d-grid gap-2 commForm"
+          >
+            <input
+              className="form-control"
+              id="form1"
+              name="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Name"
+              type="text"
+              value=""
+            />
+            <input
+              className="form-control"
+              id="form2"
+              name="comment"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Comment"
+              type="comment"
+              value=""
+            />
+            <button
+              className="btn btn-primary btn-lg"
+              disabled={false}
+              id="test"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginBottom": "30px",
+                }
+              }
+              type="submit"
+            >
+              Post
+            </button>
+          </form>
+        </div>
+        <div
+          className="col"
+        >
+          <div
+            className="sc-eCApnc iSYAyb"
+          >
+            <div
+              className="sc-jSFjdj ffbhEk"
+            >
+              <p
+                className="name"
+              >
+                Johnny First
+              </p>
+              <p
+                className="comment"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elite. Quisquam, reprehenderit.
+              </p>
+            </div>
+            <div
+              className="sc-jSFjdj ffbhEk"
+            >
+              <p
+                className="name"
+              >
+                Johnny First
+              </p>
+              <p
+                className="comment"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elite. Quisquam, reprehenderit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg
+      arial-label="Close modal"
+      className="sc-gtsrHT fDZzzA"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+      />
+    </svg>
+  </div>
+</div>
+`;

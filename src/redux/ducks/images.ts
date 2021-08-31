@@ -12,13 +12,9 @@ export const getImages = () => ({
 export const setImages = (images) => ({
     type: SET_IMAGES,
     images
-});
+})
 
-const initialState = {
-    images: []
-};
-
-export function* handleGetImages(action) {
+export function* handleGetImages() {
     try {
         const response = yield call(requestGetImages);
         const { data } = response;
@@ -28,11 +24,19 @@ export function* handleGetImages(action) {
     }
 }
 
-export default (state = initialState, action) => {
+export const initialState = {
+    images: [],
+};
+
+interface IAction {
+    type: string;
+    images?: any;
+}
+
+export default (state = initialState, action: IAction) => {
     switch (action.type) {
         case SET_IMAGES:
-            const { images } = action;
-            return { ...state, images }
+            return { ...state, images: action.images}
         default:
             return state
     }
