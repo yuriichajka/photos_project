@@ -1,15 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App snapshot should add a snapshot 1`] = `
-<div
-  className="container"
->
-  <div
-    className="justify-content-md-center row"
-  >
-    <div
-      className="center col-lg-9"
-    />
-  </div>
-</div>
+"<Provider store={{...}}>
+  <App>
+    <MemoryRouter>
+      <Router history={{...}}>
+        <Switch />
+        <Container fluid={false}>
+          <div className=\\"container\\">
+            <Row className=\\"justify-content-md-center\\">
+              <div className=\\"justify-content-md-center row\\">
+                <Col lg={9} className=\\"center\\">
+                  <div className=\\"center col-lg-9\\" />
+                </Col>
+              </div>
+            </Row>
+          </div>
+        </Container>
+        <Memo(l) />
+      </Router>
+    </MemoryRouter>
+  </App>
+</Provider>"
 `;

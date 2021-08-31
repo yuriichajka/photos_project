@@ -4,15 +4,14 @@ import App from '../App';
 
 import { Provider } from 'react-redux'
 import store from '../redux/configureStore';
-import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
 let wrapper;
 
 describe('App snapshot',  () => {
     it('should add a snapshot',  () => {
-        wrapper = renderer.create(<Provider store={store}><App /></Provider>).toJSON();
-        expect(wrapper).toMatchSnapshot();
+        wrapper = mount(<Provider store={store}><App /></Provider>);
+        expect(wrapper.debug()).toMatchSnapshot();
     });
 });
 
