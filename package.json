@@ -59,7 +59,7 @@
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.0",
+    "jest": "^26.6.3",
     "jest-config": "^27.0.6",
     "jest-dom": "^4.0.0",
     "react-test-render": "^1.1.2"

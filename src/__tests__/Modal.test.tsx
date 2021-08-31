@@ -38,22 +38,3 @@ describe("Correct render", () => {
         expect(wrapper.find('button')).toHaveLength(1);
     });
 });
-
-    describe('dad', () => {
-        const getPhoto = jest.fn().mockImplementation(() => Promise.resolve());
-        let wrapper;
-        beforeEach(() => {
-            // @ts-ignore
-            wrapper = mount(<Modal getPhoto={getPhoto}/>)
-        });
-
-        afterEach(() => {
-            wrapper = null;
-        });
-
-        it("should add name to first input field", () => {
-            wrapper.find("input#form1").simulate("change", { target: { value: "Charles" } });
-            expect(wrapper.find("input#form1").text()).toEqual("Charles");
-        });
-
-    });
